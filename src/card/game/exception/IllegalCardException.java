@@ -1,6 +1,6 @@
 package card.game.exception;
 
-public class IllegaCardInfoException extends RuntimeException {
+public class IllegalCardException extends RuntimeException {
 
 
 	/**
@@ -8,7 +8,7 @@ public class IllegaCardInfoException extends RuntimeException {
 	 */
 	private static final long serialVersionUID = 944049465781866273L;
 
-	public IllegaCardInfoException(String message) {
+	public IllegalCardException(String message) {
 		super(message);
 	}
 }

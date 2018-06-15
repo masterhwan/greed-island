@@ -1,6 +1,6 @@
 package card.game.card;
 
-import card.game.exception.IllegaCardInfoException;
+import card.game.exception.IllegalCardException;
 
 public enum CardInfo {
 	ONE(1, "safari of room", Rank.SS, 3, "test");
@@ -26,7 +26,7 @@ public enum CardInfo {
 				return index;
 			}
 		}
-		throw new IllegaCardInfoException("존재하지 않는 카드 입니다.");
+		throw new IllegalCardException(no +"번 카드는 존재하지 않습니다.");
 	}
 
 	public String getName() {

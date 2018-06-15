@@ -1,7 +1,6 @@
 package card.game.card;
 
 public class Card {
-
 	private int no;
 	private String name;
 	private Rank rank;
