@@ -4,6 +4,7 @@ import card.game.exception.InvalidPlayerException;
 
 public class Player {
 	private Type type;
+	private String name;
 
 	public Player() {
 	}
@@ -12,11 +13,20 @@ public class Player {
 		this.type = type;
 	}
 
+	public Player(Type type, String name) {
+		this.type = type;
+		this.name = name;
+	}
+
 	public static Player create(Type type) {
 		if (type != Type.PLAYER) {
 			throw new InvalidPlayerException("플레이어만 생성할 수 있습니다.");
 		}
 		return new Player(type);
+	}
+
+	public static Player create(Type type, String name) {
+		return new Player(type, name);
 	}
 
 	@Override
@@ -40,4 +50,5 @@ public class Player {
 			return false;
 		return true;
 	}
+
 }

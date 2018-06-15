@@ -33,11 +33,6 @@ public class PlayerTest {
 	public void createMonster() {
 		verifyUser(Player.create(Type.MONSTER));
 	}
-	
-	@Test
-	public void hp() {
-		
-	}
 
 	private void verifyUser(Player player) {
 		assertEquals(player, this.player);
