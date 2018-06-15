@@ -6,6 +6,7 @@ public class Card {
 	private Rank rank;
 	private int maxCount;
 	private String discription;
+	private boolean appointed;
 
 	public Card(int no, String name, Rank rank, int max_count, String discription) {
 		this.no = no;
@@ -21,6 +22,7 @@ public class Card {
 		this.rank = cardInfo.getRank();
 		this.maxCount = cardInfo.getMaxCount();
 		this.discription = cardInfo.getDiscription();
+		this.appointed = cardInfo.getAppointed();
 	}
 
 	public static Card create(int no) {
@@ -35,10 +37,15 @@ public class Card {
 		return maxCount;
 	}
 
+	public boolean isCardNumber(Card card) {
+		return this.no == card.no;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + (appointed ? 1231 : 1237);
 		result = prime * result + ((discription == null) ? 0 : discription.hashCode());
 		result = prime * result + maxCount;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
@@ -56,6 +63,8 @@ public class Card {
 		if (getClass() != obj.getClass())
 			return false;
 		Card other = (Card) obj;
+		if (appointed != other.appointed)
+			return false;
 		if (discription == null) {
 			if (other.discription != null)
 				return false;
@@ -78,11 +87,7 @@ public class Card {
 	@Override
 	public String toString() {
 		return "Card [no=" + no + ", name=" + name + ", rank=" + rank + ", maxCount=" + maxCount + ", discription="
-				+ discription + "]";
-	}
-
-	public boolean isCardNumber(Card card) {
-		return this.no == card.no;
+				+ discription + ", appointed=" + appointed + "]";
 	}
 
 }

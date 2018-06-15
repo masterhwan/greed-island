@@ -3,20 +3,24 @@ package card.game.card;
 import card.game.exception.IllegalCardException;
 
 public enum CardInfo {
-	ONE(1, "safari of room", Rank.SS, 3, "test");
+	ONE(1, "safari of room", Rank.SS, 3, "test", true), 
+	ONETHOUSAND_THREE(1003, "defence wall", Rank.G, 400, "test",
+			false);
 
 	private int no;
 	private String name;
 	private Rank rank;
 	private int maxCount;
 	private String discription;
+	private boolean appointed;
 
-	private CardInfo(int no, String name, Rank rank, int maxCount, String discription) {
+	private CardInfo(int no, String name, Rank rank, int maxCount, String discription, boolean appointed) {
 		this.no = no;
 		this.name = name;
 		this.rank = rank;
 		this.maxCount = maxCount;
 		this.discription = discription;
+		this.appointed = appointed;
 	}
 
 	public static CardInfo findCard(int no) {
@@ -26,7 +30,7 @@ public enum CardInfo {
 				return index;
 			}
 		}
-		throw new IllegalCardException(no +"번 카드는 존재하지 않습니다.");
+		throw new IllegalCardException(no + "번 카드는 존재하지 않습니다.");
 	}
 
 	public String getName() {
@@ -47,5 +51,9 @@ public enum CardInfo {
 
 	public int getNo() {
 		return no;
+	}
+
+	public boolean getAppointed() {
+		return appointed;
 	}
 }
