@@ -27,6 +27,14 @@ public class Card {
 		return new Card(CardInfo.findCard(no));
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public int getMaxCount() {
+		return maxCount;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -72,4 +80,9 @@ public class Card {
 		return "Card [no=" + no + ", name=" + name + ", rank=" + rank + ", maxCount=" + maxCount + ", discription="
 				+ discription + "]";
 	}
+
+	public boolean isCardNumber(Card card) {
+		return this.no == card.no;
+	}
+
 }
