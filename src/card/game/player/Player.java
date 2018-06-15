@@ -1,10 +1,17 @@
 package card.game.player;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import card.game.card.Card;
+import card.game.exception.IllegalCardException;
 import card.game.exception.InvalidPlayerException;
+import card.game.manager.ManagerCard;
 
 public class Player {
 	private Type type;
 	private String name;
+	private List<Card> cards = new ArrayList<>();
 
 	public Player() {
 	}
@@ -29,6 +36,20 @@ public class Player {
 		return new Player(type, name);
 	}
 
+	public void gain(String cardName) {
+		Card card = Card.create(cardName);
+		ManagerCard.add(card);
+		cards.add(card);
+	}
+
+	public boolean getCards() {
+		return cards.isEmpty();
+	}
+
+	public List<Card> book() {
+		return cards;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -51,4 +72,12 @@ public class Player {
 		return true;
 	}
 
+	public Card spell(String name) {
+		for (Card card : cards) {
+			if (card.isVaildSpell(name)) {
+				return card;
+			}
+		}
+		throw new IllegalCardException(name + " 카드가 존재하지 않습니다.");
+	}
 }

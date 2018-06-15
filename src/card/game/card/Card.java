@@ -29,6 +29,10 @@ public class Card {
 		return new Card(CardInfo.findCard(no));
 	}
 
+	public static Card create(String cardName) {
+		return new Card(CardInfo.findCard(cardName));
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -40,7 +44,10 @@ public class Card {
 	public boolean isCardNumber(Card card) {
 		return this.no == card.no;
 	}
-
+	
+	public boolean isVaildSpell(String name) {
+		return this.name == name;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -89,5 +96,7 @@ public class Card {
 		return "Card [no=" + no + ", name=" + name + ", rank=" + rank + ", maxCount=" + maxCount + ", discription="
 				+ discription + ", appointed=" + appointed + "]";
 	}
+
+
 
 }

@@ -3,9 +3,8 @@ package card.game.card;
 import card.game.exception.IllegalCardException;
 
 public enum CardInfo {
-	ONE(1, "safari of room", Rank.SS, 3, "test", true), 
-	ONETHOUSAND_THREE(1003, "defence wall", Rank.G, 400, "test",
-			false);
+	ONE(1, "한 평의 밀림", Rank.SS, 3, "test", true), ONETHOUSAND_THREE(1003, "방벽", Rank.G, 400, "test",
+			false), ONETHOUSAND_SEVEN(1007, "절도", Rank.C, 50, "test", false);
 
 	private int no;
 	private String name;
@@ -55,5 +54,15 @@ public enum CardInfo {
 
 	public boolean getAppointed() {
 		return appointed;
+	}
+
+	public static CardInfo findCard(String cardName) {
+		CardInfo[] cards = values();
+		for (CardInfo card : cards) {
+			if (card.name.equals(cardName)) {
+				return card;
+			}
+		}
+		throw new IllegalCardException(cardName + " 카드는 존재하지 않습니다.");
 	}
 }
