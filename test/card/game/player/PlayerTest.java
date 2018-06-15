@@ -2,6 +2,7 @@ package card.game.player;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -32,13 +33,14 @@ public class PlayerTest {
 	@Test
 	public void gain() throws Exception {
 		player.gain("한 평의 밀림");
-		assertFalse(player.getCards());
+		assertFalse(player.haveCards());
+
 	}
 
 	@Test(expected = IllegalCardException.class)
 	public void gain_faild() throws Exception {
 		player.gain("한 평의 해안");
-		assertFalse(player.getCards());
+		assertTrue(player.haveCards());
 	}
 
 	@Test
@@ -47,7 +49,7 @@ public class PlayerTest {
 		player.gain("방벽");
 		player.gain("절도");
 		cards = player.book();
-		verifySpell(Card.create("절도"), player.spell("절도"));
+		assertTrue(cards.contains(Card.create("절도")));
 	}
 
 	@Test(expected = IllegalCardException.class)
@@ -56,10 +58,6 @@ public class PlayerTest {
 		player.gain("방벽");
 		player.gain("절도");
 		cards = player.book();
-		verifySpell(Card.create("절도"), player.spell("바보"));
-	}
-
-	private void verifySpell(Card gameSpell, Card userSpell) {
-		assertEquals(gameSpell, userSpell);
+		assertTrue(cards.contains(Card.create("절도")));
 	}
 }

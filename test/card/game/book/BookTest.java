@@ -16,7 +16,6 @@ public class BookTest {
 
 	@Test
 	public void add() throws Exception {
-		book.initialize();
 		assertEquals(100, book.getAppointCardsSize());
 		assertEquals(45, book.freeCardsSize());
 		assertEquals(145, book.bookSize());

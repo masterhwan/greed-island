@@ -1,8 +1,7 @@
 package card.game.card;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import card.game.exception.IllegalCardException;
@@ -10,14 +9,9 @@ import card.game.exception.IllegalCardException;
 public class CardTest {
 	private Card card;
 
-	@Before
-	public void setUp() {
-		card = new Card(1, "safari of room", Rank.SS, 3, "test");
-	}
-
 	@Test
 	public void create() throws Exception {
-		verifyCard(Card.create(1), card);
+		verifyCard(Card.create(1), Card.create("한 평의 밀림"));
 	}
 
 	@Test(expected = IllegalCardException.class)

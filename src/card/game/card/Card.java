@@ -1,22 +1,15 @@
 package card.game.card;
 
-import card.game.utils.CardType;
+import java.util.List;
 
 public class Card {
+
 	private int no;
 	private String name;
 	private Rank rank;
 	private int maxCount;
 	private String discription;
 	private boolean appointed;
-
-	public Card(int no, String name, Rank rank, int max_count, String discription) {
-		this.no = no;
-		this.name = name;
-		this.rank = rank;
-		this.maxCount = max_count;
-		this.discription = discription;
-	}
 
 	public Card(CardInfo cardInfo) {
 		this.no = cardInfo.getNo();
@@ -60,6 +53,10 @@ public class Card {
 
 	public boolean isAppointed() {
 		return appointed;
+	}
+
+	public void add(List<Card> appointCards) {
+		appointCards.set(this.no, this);
 	}
 
 	@Override
@@ -110,4 +107,5 @@ public class Card {
 		return "Card [no=" + no + ", name=" + name + ", rank=" + rank + ", maxCount=" + maxCount + ", discription="
 				+ discription + ", appointed=" + appointed + "]";
 	}
+
 }

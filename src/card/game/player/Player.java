@@ -1,16 +1,18 @@
 package card.game.player;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import card.game.book.Book;
 import card.game.card.Card;
-import card.game.exception.IllegalCardException;
 import card.game.manager.ManagerCard;
 
 public class Player {
+	private static final Logger log = LoggerFactory.getLogger(Player.class);
 	private String name;
-	private List<Card> appointedCards = new ArrayList<>();
-	private List<Card> freeCards = new ArrayList<>();
+	private Book book = new Book();
 
 	public Player() {
 	}
@@ -29,24 +31,15 @@ public class Player {
 
 	public void gain(String cardName) {
 		Card card = Card.create(cardName);
+		log.debug("gain" + card);
 		ManagerCard.add(card);
 		add(card);
 	}
 
 	private void add(Card card) {
-		if (card.isAppointed()) {
-			appointedCards.add(card);
-			return;
-		}
-		freeCards.add(card);
-	}
-
-	public boolean getCards() {
-		return appointedCards.isEmpty();
-	}
-
-	public List<Card> book() {
-		return appointedCards;
+		log.debug("add" + card);
+		log.debug("book" + book);
+		book.add(card);
 	}
 
 	@Override
@@ -74,12 +67,11 @@ public class Player {
 		return true;
 	}
 
-	public Card spell(String name) {
-		for (Card card : appointedCards) {
-			if (card.isVaildSpell(name)) {
-				return card;
-			}
-		}
-		throw new IllegalCardException(name + " 카드가 존재하지 않습니다.");
+	public boolean haveCards() {
+		return book.isEmpty();
+	}
+
+	public List<Card> book() {
+		return book.book();
 	}
 }
