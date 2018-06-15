@@ -24,12 +24,22 @@ public enum CardInfo {
 
 	public static CardInfo findCard(int no) {
 		CardInfo[] cards = values();
-		for (CardInfo index : cards) {
-			if (index.no == no) {
-				return index;
+		for (CardInfo cardInfo : cards) {
+			if (cardInfo.no == no) {
+				return cardInfo;
 			}
 		}
 		throw new IllegalCardException(no + "번 카드는 존재하지 않습니다.");
+	}
+
+	public static CardInfo findCard(String cardName) {
+		CardInfo[] cardInfos = values();
+		for (CardInfo cardInfo : cardInfos) {
+			if (cardInfo.name.equals(cardName)) {
+				return cardInfo;
+			}
+		}
+		throw new IllegalCardException(cardName + " 카드는 존재하지 않습니다.");
 	}
 
 	public String getName() {
@@ -54,15 +64,5 @@ public enum CardInfo {
 
 	public boolean getAppointed() {
 		return appointed;
-	}
-
-	public static CardInfo findCard(String cardName) {
-		CardInfo[] cards = values();
-		for (CardInfo card : cards) {
-			if (card.name.equals(cardName)) {
-				return card;
-			}
-		}
-		throw new IllegalCardException(cardName + " 카드는 존재하지 않습니다.");
 	}
 }

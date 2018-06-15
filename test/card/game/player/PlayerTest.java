@@ -7,12 +7,9 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import card.game.card.Card;
 import card.game.exception.IllegalCardException;
-import card.game.exception.InvalidPlayerException;
 
 public class PlayerTest {
 	private Player player;
@@ -20,26 +17,16 @@ public class PlayerTest {
 
 	@Before
 	public void setup() {
-		player = new Player(Type.PLAYER);
+		player = new Player();
 	}
 
 	@Test
 	public void create() {
-		verifyUser(Player.create(Type.PLAYER));
+		verifyUser(player, Player.create());
 	}
 
-	@Test(expected = InvalidPlayerException.class)
-	public void createNPC() {
-		verifyUser(Player.create(Type.NPC));
-	}
-
-	@Test(expected = InvalidPlayerException.class)
-	public void createMonster() {
-		verifyUser(Player.create(Type.MONSTER));
-	}
-
-	private void verifyUser(Player player) {
-		assertEquals(player, this.player);
+	private void verifyUser(Player oldPlayer, Player newPlayer) {
+		assertEquals(oldPlayer, newPlayer);
 	}
 
 	@Test

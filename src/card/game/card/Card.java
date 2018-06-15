@@ -1,5 +1,7 @@
 package card.game.card;
 
+import card.game.utils.CardType;
+
 public class Card {
 	private int no;
 	private String name;
@@ -25,6 +27,13 @@ public class Card {
 		this.appointed = cardInfo.getAppointed();
 	}
 
+	public Card() {
+	}
+
+	public static Card create() {
+		return new Card();
+	}
+
 	public static Card create(int no) {
 		return new Card(CardInfo.findCard(no));
 	}
@@ -44,10 +53,15 @@ public class Card {
 	public boolean isCardNumber(Card card) {
 		return this.no == card.no;
 	}
-	
+
 	public boolean isVaildSpell(String name) {
 		return this.name == name;
 	}
+
+	public boolean isAppointed() {
+		return appointed;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -96,7 +110,4 @@ public class Card {
 		return "Card [no=" + no + ", name=" + name + ", rank=" + rank + ", maxCount=" + maxCount + ", discription="
 				+ discription + ", appointed=" + appointed + "]";
 	}
-
-
-
 }

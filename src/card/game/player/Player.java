@@ -5,56 +5,55 @@ import java.util.List;
 
 import card.game.card.Card;
 import card.game.exception.IllegalCardException;
-import card.game.exception.InvalidPlayerException;
 import card.game.manager.ManagerCard;
 
 public class Player {
-	private Type type;
 	private String name;
-	private List<Card> cards = new ArrayList<>();
+	private List<Card> appointedCards = new ArrayList<>();
+	private List<Card> freeCards = new ArrayList<>();
 
 	public Player() {
 	}
 
-	public Player(Type type) {
-		this.type = type;
-	}
-
-	public Player(Type type, String name) {
-		this.type = type;
+	public Player(String name) {
 		this.name = name;
 	}
 
-	public static Player create(Type type) {
-		if (type != Type.PLAYER) {
-			throw new InvalidPlayerException("플레이어만 생성할 수 있습니다.");
-		}
-		return new Player(type);
+	public static Player create() {
+		return new Player();
 	}
 
-	public static Player create(Type type, String name) {
-		return new Player(type, name);
+	public static Player create(String name) {
+		return new Player(name);
 	}
 
 	public void gain(String cardName) {
 		Card card = Card.create(cardName);
 		ManagerCard.add(card);
-		cards.add(card);
+		add(card);
+	}
+
+	private void add(Card card) {
+		if (card.isAppointed()) {
+			appointedCards.add(card);
+			return;
+		}
+		freeCards.add(card);
 	}
 
 	public boolean getCards() {
-		return cards.isEmpty();
+		return appointedCards.isEmpty();
 	}
 
 	public List<Card> book() {
-		return cards;
+		return appointedCards;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
 
@@ -67,13 +66,16 @@ public class Player {
 		if (getClass() != obj.getClass())
 			return false;
 		Player other = (Player) obj;
-		if (type != other.type)
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
 			return false;
 		return true;
 	}
 
 	public Card spell(String name) {
-		for (Card card : cards) {
+		for (Card card : appointedCards) {
 			if (card.isVaildSpell(name)) {
 				return card;
 			}
