@@ -49,4 +49,20 @@ public class Card {
 			return false;
 		return true;
 	}
+
+	public String getName() {
+		return card.getName();
+	}
+
+	public boolean isCardNumber(Card card) {
+		return this.card.getNo() == card.card.getNo();
+	}
+
+	public int getMaxCount() {
+		return card.getMaxCount();
+	}
+
+	public boolean isAppointed() {
+		return card.getAppointed();
+	}
 }
