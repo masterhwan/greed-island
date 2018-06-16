@@ -3,21 +3,10 @@ package card.game.card;
 import java.util.List;
 
 public class Card {
+	private CardList card;
 
-	private int no;
-	private String name;
-	private Rank rank;
-	private int maxCount;
-	private String discription;
-	private boolean appointed;
-
-	public Card(CardInfo cardInfo) {
-		this.no = cardInfo.getNo();
-		this.name = cardInfo.getName();
-		this.rank = cardInfo.getRank();
-		this.maxCount = cardInfo.getMaxCount();
-		this.discription = cardInfo.getDiscription();
-		this.appointed = cardInfo.getAppointed();
+	public Card(CardList cardInfo) {
+		this.card = cardInfo;
 	}
 
 	public Card() {
@@ -28,47 +17,22 @@ public class Card {
 	}
 
 	public static Card create(int no) {
-		return new Card(CardInfo.findCard(no));
+		return new Card(CardList.findCard(no));
 	}
 
 	public static Card create(String cardName) {
-		return new Card(CardInfo.findCard(cardName));
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public int getMaxCount() {
-		return maxCount;
-	}
-
-	public boolean isCardNumber(Card card) {
-		return this.no == card.no;
-	}
-
-	public boolean isVaildSpell(String name) {
-		return this.name == name;
-	}
-
-	public boolean isAppointed() {
-		return appointed;
+		return new Card(CardList.findCard(cardName));
 	}
 
 	public void add(List<Card> appointCards) {
-		appointCards.set(this.no, this);
+		appointCards.set(card.getNo(), this);
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (appointed ? 1231 : 1237);
-		result = prime * result + ((discription == null) ? 0 : discription.hashCode());
-		result = prime * result + maxCount;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + no;
-		result = prime * result + ((rank == null) ? 0 : rank.hashCode());
+		result = prime * result + ((card == null) ? 0 : card.hashCode());
 		return result;
 	}
 
@@ -81,31 +45,8 @@ public class Card {
 		if (getClass() != obj.getClass())
 			return false;
 		Card other = (Card) obj;
-		if (appointed != other.appointed)
-			return false;
-		if (discription == null) {
-			if (other.discription != null)
-				return false;
-		} else if (!discription.equals(other.discription))
-			return false;
-		if (maxCount != other.maxCount)
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (no != other.no)
-			return false;
-		if (rank != other.rank)
+		if (card != other.card)
 			return false;
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		return "Card [no=" + no + ", name=" + name + ", rank=" + rank + ", maxCount=" + maxCount + ", discription="
-				+ discription + ", appointed=" + appointed + "]";
-	}
-
 }

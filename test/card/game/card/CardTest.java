@@ -16,7 +16,7 @@ public class CardTest {
 
 	@Test(expected = IllegalCardException.class)
 	public void create_faild() throws Exception {
-		verifyCard(Card.create(10001), card);
+		verifyCard(Card.create(10001), Card.create(10001));
 	}
 
 	private void verifyCard(Card card1, Card card2) {
